@@ -1,7 +1,7 @@
-val dataClient = Array(3) {""}
+val dataClient = Array(3){""}
 val articles = Array(5) {""}
 val priceArticles = Array(5){ 0 }
-val articlesSelected = emptyArray<String>()
+val articlesSelected = Array(5) {""}
 val articleQuantity = Array(5){ 0 }
 val priceLine = Array(5){ 0.0 }
 
@@ -58,11 +58,12 @@ fun getQuantityArticleSold (indexArt: Int)= articleQuantity.filterIndexed{index,
 
 fun getArticlePriceSold (indexArt: Int)= priceLine.filterIndexed{index,priceLine-> index ==indexArt }[0]
 
-fun printInvoice(articleSold:Array<String>){
-    var totalInvoice = 0.0
+val validateEmptyArray = { elemento: String -> elemento.isNotEmpty()}
 
+fun printInvoice(articleSold: Array<String>){
+    var totalInvoice = 0.0
     when {
-        articleSold.isNotEmpty() -> {
+        articleSold.count(validateEmptyArray) > 0 -> {
             println("Venta a: ${dataClient[0]}")
             for ((index, article) in articleSold.withIndex()) {
                 if (article != "") {
@@ -84,6 +85,7 @@ fun createInvoice(){
     do {
         showArticles()
         val articleSelected = readLine()?.toInt() ?:0
+        println(articleSelected)
         if(validArticleSelected(articleSelected)) saveArticleSelected(articleSelected) else break
         println("Ingrese Cantidad del articulo")
         val quantity = readLine()?.toInt()?:0
