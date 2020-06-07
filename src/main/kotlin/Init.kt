@@ -58,7 +58,7 @@ fun getQuantityArticleSold (indexArt: Int)= articleQuantity.filterIndexed{index,
 
 fun getArticlePriceSold (indexArt: Int)= priceLine.filterIndexed{index,priceLine-> index ==indexArt }[0]
 
-val validateEmptyArray = { elemento: String -> elemento.isNotEmpty()}
+val validateEmptyArray = { element: String -> element.isNotEmpty()}
 
 fun printInvoice(articleSold: Array<String>){
     var totalInvoice = 0.0
